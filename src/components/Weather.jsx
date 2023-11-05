@@ -46,9 +46,10 @@ const Weather = () => {
 
   useEffect(() => {
     getWeather();
-  }, []);
+  }, [location.search]);
 
   const getWeather = () => {
+    setIsLoading(true);
     fetch(url + key)
       .then((res) => {
         if (res.ok) {

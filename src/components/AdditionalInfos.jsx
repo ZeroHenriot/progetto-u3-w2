@@ -26,7 +26,7 @@ const AdditionalInfos = () => {
 
   useEffect(() => {
     getWeather();
-  }, []);
+  }, [location.search]);
 
   const getWeather = () => {
     fetch(url + key)
@@ -144,7 +144,7 @@ const AdditionalInfos = () => {
                         <span className="fs-4">Wind:</span>
                       </Card.Title>
                     </Col>
-                    <Col xs={6} md={5} className="fs-4">
+                    <Col xs={6} md={5} className="fs-4 text-nowrap">
                       <Wind
                         className="me-2"
                         fontSize={"30px"}

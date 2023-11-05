@@ -10,7 +10,9 @@ const WeatherLocation = () => {
   const key = "2675b5f67ebe6be86ee8d73fdee7f98c";
 
   useEffect(() => {
-    getLocation();
+    if (searchValue !== "") {
+      getLocation();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchValue]);
 
@@ -40,7 +42,7 @@ const WeatherLocation = () => {
       <div className="h-100">
         <Row className="justify-content-end h-100">
           <Col xs={10}>
-            <ListGroup className="">
+            <ListGroup className="position-relative">
               <div>
                 <Form.Control
                   placeholder="Cerca città"
@@ -49,20 +51,19 @@ const WeatherLocation = () => {
                   onChange={(e) =>
                     setSearchValue(
                       e.target.value.charAt(0).toUpperCase() +
-                        e.target.value.slice(1)
+                        e.target.value.slice(1).toLowerCase()
                     )
                   }
                 />
-                <div className="results">
+                <div className="results position-absolute w-100">
                   {city
                     .filter((city) =>
                       city.name.toLowerCase(searchValue.toLowerCase())
                     )
                     .map((city, index) => (
-                      <Row>
+                      <Row key={index}>
                         <Col>
                           <ListGroup.Item
-                            key={index}
                             className={` ${
                               !searchValue ? "d-none" : "d-block"
                             } mt-1 rounded fs-5 border-0`}
@@ -73,15 +74,19 @@ const WeatherLocation = () => {
                               className="d-flex
                        justify-content-between link text-black"
                               style={{ textDecoration: "none" }}
+                              onClick={() => setSearchValue("")}
                             >
                               <Row className="w-100 justify-content-between">
-                                <Col xs={10} md={4}>
+                                <Col xs={12} md={4}>
                                   <span>{searchValue ? city.name : ""}</span>
                                 </Col>
                                 <Col md={6} className="d-none d-md-block">
                                   <span>{searchValue ? city.state : ""}</span>
                                 </Col>
-                                <Col xs={2} className="text-end">
+                                <Col
+                                  sm={2}
+                                  className="text-end d-none d-sm-block"
+                                >
                                   <span>{searchValue ? city.country : ""}</span>
                                 </Col>
                               </Row>

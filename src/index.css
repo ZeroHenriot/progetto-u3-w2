@@ -2,7 +2,14 @@ html,
 body,
 #root {
   height: 100vh;
-  background: #3d97c4;
+}
+
+.main-bg {
+  background: linear-gradient(
+    0deg,
+    rgba(104, 205, 255, 1) 0%,
+    rgba(61, 151, 196, 1) 100%
+  );
 }
 
 body {
@@ -44,8 +51,8 @@ code {
 }
 
 .results {
+  /* position: absolute; */
   z-index: 99;
-  background: #3d97c4;
 }
 
 .prev-weather {

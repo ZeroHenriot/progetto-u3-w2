@@ -16,7 +16,7 @@ function App() {
           <header>
             <MyNavBar />
           </header>
-          <main className="flex-grow-1">
+          <main className="flex-grow-1 main-bg">
             <Routes>
               <Route path="/" element={<HomePage />} />
               {/* <Route path="/" element={<WeatherLocation />} /> */}

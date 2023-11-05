@@ -39,7 +39,7 @@ const WeatherForecast = () => {
 
   useEffect(() => {
     getWeather();
-  }, []);
+  }, [location.search]);
 
   const getWeather = () => {
     fetch(url + key)
