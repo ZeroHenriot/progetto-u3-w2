@@ -214,7 +214,7 @@ const Weather = () => {
                 </Card>
               </Col>
             </Row>
-            <Row className="justify-content-center w-100 mt-3">
+            <Row className="justify-content-center w-100">
               <WeatherForecast />
               <AdditionalInfos />
             </Row>

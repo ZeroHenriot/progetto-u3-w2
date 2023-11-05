@@ -85,7 +85,7 @@ const WeatherForecast = () => {
     <>
       {!isLoading && weather && (
         <Col xs={7} style={{ borderRight: "1px solid #add8e6" }}>
-          <Row className="justify-content-center w-100 mt-3 flex-column">
+          <Row className="justify-content-center w-100 flex-column">
             {forecastDays.map((day, index) => {
               return (
                 <Col key={index}>

@@ -73,9 +73,15 @@ const WeatherLocation = () => {
                        justify-content-between link text-black"
                               style={{ textDecoration: "none" }}
                             >
-                              <span>{searchValue ? city.name : ""}</span>
-                              <span>{searchValue ? city.state : ""}</span>
-                              <span>{searchValue ? city.country : ""}</span>
+                              <Row className="w-100 justify-content-between">
+                                <Col xs={5}>{searchValue ? city.name : ""}</Col>
+                                <Col xs={4}>
+                                  {searchValue ? city.state : ""}
+                                </Col>
+                                <Col xs={2} className="text-end">
+                                  {searchValue ? city.country : ""}
+                                </Col>
+                              </Row>
                             </Link>
                           </ListGroup.Item>
                         </Col>
