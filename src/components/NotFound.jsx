@@ -1,11 +1,11 @@
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row } from "react-bootstrap";
 
 const NotFound = () => (
-  <Row>
-    <Col>
-      <div>404 Not-Found</div>
+  <Row className="h-100">
+    <Col className="d-flex justify-content-center align-items-center display-1">
+      <span>404 Not-Found</span>
     </Col>
   </Row>
-)
+);
 
-export default NotFound
+export default NotFound;

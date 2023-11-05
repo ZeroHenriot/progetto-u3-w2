@@ -26,6 +26,7 @@ function HomePage() {
     setLocation({ lat: latitude, lon: longitude });
 
     const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=`;
+    // const url =
     const key = "2675b5f67ebe6be86ee8d73fdee7f98c&units=metric";
 
     fetch(url + key)
@@ -61,7 +62,7 @@ function HomePage() {
             </Button>
           ) : null}
           {weather && lat && lon ? (
-            <Navigate to={`/weather/?lat=${lat}&lon=${lon}`} />
+            <Navigate to={`/weather?lat=${lat}&lon=${lon}`} />
           ) : null}
         </Col>
       </Row>
