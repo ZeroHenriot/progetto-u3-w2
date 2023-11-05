@@ -6,6 +6,7 @@ import NotFound from './components/NotFound'
 import Weather from './components/Weather'
 import MyNavBar from './components/MyNavBar'
 import MyFooter from './components/MyFooter'
+import HomePage from './components/HomePage'
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
           </header>
           <main className="flex-grow-1">
             <Routes>
-              <Route path="/" element={<WeatherLocation />} />
+              <Route path="/" element={<HomePage />} />
+              {/* <Route path="/" element={<WeatherLocation />} /> */}
               <Route path="/weather" element={<Weather />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

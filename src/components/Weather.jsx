@@ -1,246 +1,227 @@
-import { useEffect, useState } from 'react'
-import { Alert, Card, Col, Container, Row, Spinner } from 'react-bootstrap'
+import { useEffect, useState } from "react";
+import { Alert, Card, Col, Container, Row, Spinner } from "react-bootstrap";
 import {
   CloudFog2Fill,
-  CloudLightningFill,
+  CloudHaze2Fill,
+  CloudLightningRainFill,
   CloudRainFill,
   CloudSnowFill,
   CloudsFill,
-  CloudyFill,
   SunFill,
-} from 'react-bootstrap-icons'
-import { useLocation } from 'react-router-dom'
+  ThermometerHigh,
+  ThermometerLow,
+} from "react-bootstrap-icons";
+import { useLocation } from "react-router-dom";
+import AdditionalInfos from "./AdditionalInfos";
+import WeatherForecast from "./WeatherForecast";
 
 const Weather = () => {
   const [weather, setWeather] = useState({
-    location: '',
-    temperature: '',
-    maxTemperature: '',
-    minTemperature: '',
-    description: '',
-    condition: '',
-  })
+    location: "",
+    description: "",
+    temperature: "",
+    maxTemperature: "",
+    minTemperature: "",
+    date: "",
+  });
 
-  const [isLoading, setIsLoading] = useState(true)
-  const [isError, setIsError] = useState(false)
+  const dayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
-  const location = useLocation()
-  console.log('il tuo oggetto', weather)
+  const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
+
+  const location = useLocation();
+  console.log("il tuo oggetto", weather);
   //   console.log(location.search)
-  const url = `https://api.openweathermap.org/data/2.5/weather/${location.search}&appid=`
-  const key = '2675b5f67ebe6be86ee8d73fdee7f98c&units=metric'
+  const url = `https://api.openweathermap.org/data/2.5/weather${location.search}&appid=`;
+  const key = "2675b5f67ebe6be86ee8d73fdee7f98c&units=metric";
 
   useEffect(() => {
-    getWeather()
-  }, [])
+    getWeather();
+  }, []);
 
   const getWeather = () => {
     fetch(url + key)
       .then((res) => {
         if (res.ok) {
-          return res.json()
+          return res.json();
         } else {
-          throw new Error('Hai avuto un errore nel recupero del meteo')
+          throw new Error("Hai avuto un errore nel recupero del meteo");
         }
       })
       .then((data) => {
-        // console.log(data)
+        console.log(data);
         setTimeout(() => {
-          setWeather({
+          setWeather(() => ({
             location: data.name,
+            description: data.weather[0].description,
             temperature: Math.trunc(data.main.temp),
             maxTemperature: Math.trunc(data.main.temp_max),
             minTemperature: Math.trunc(data.main.temp_min),
-            description: data.weather[0].description,
-            condition: data.weather[0].main,
-          })
-          setIsLoading(false)
-        }, 650)
+            date: dayNames[new Date(data.dt * 1000).getDay()],
+          }));
+
+          setIsLoading(false);
+        }, 650);
       })
       .catch((err) => {
-        setIsLoading(false)
-        setIsError(true)
-        console.log('hai avuto un errore', err)
-      })
-  }
+        setIsLoading(false);
+        setIsError(true);
+        console.log("hai avuto un errore", err);
+      });
+  };
   return (
     <>
-      <Container className="h-100 d-flex flex-column align-items-center justify-content-center">
+      <Container fluid className="h-100 d-flex flex-column align-items-center">
         {isLoading && (
-          <div className="d-flex justify-content-center align-items-center mt-3">
+          <div className="d-flex h-100 align-items-center justify-content-center mt-3">
             <Spinner
               animation="grow"
               variant="dark"
-              style={{ height: '50px', width: '50px' }}
+              style={{ height: "50px", width: "50px" }}
             />
           </div>
         )}
         {isError && (
-          <div className="text-center px-2">
+          <div className="d-flex px-2 h-100 align-items-center justify-content-center">
             <Alert variant="danger">Errore nel caricamento</Alert>
           </div>
         )}
         {!isLoading && !isError && weather && (
-          <Row className="justify-content-center w-100 ">
-            <Col xs={6} xl={4}>
-              <Card style={{ background: '#6BA7CC' }}>
-                <Card.Body>
-                  <Card.Title className="fs-1">{weather.location}</Card.Title>
-                  <div>
-                    <div className="d-flex justify-content-between mt-3 fs-5">
-                      <span className="d-flex align-items-center">
-                        {weather.description
-                          .toLowerCase()
-                          .includes('Clouds'.toLowerCase()) ? (
-                          <CloudsFill
-                            color="#E2FCFF"
-                            className="me-1"
-                            size={'20px'}
-                          />
-                        ) : (
-                          ''
-                        )}
-                        {weather.description
-                          .toLowerCase()
-                          .includes('Sun'.toLowerCase()) ? (
-                          <SunFill
-                            color="#FFBF00"
-                            className="me-1"
-                            size={'20px'}
-                          />
-                        ) : (
-                          ''
-                        )}
-                        {weather.description
-                          .toLowerCase()
-                          .includes('Rain'.toLowerCase()) ? (
-                          <CloudRainFill
-                            color="#E2FCFF"
-                            className="me-1"
-                            size={'20px'}
-                          />
-                        ) : (
-                          ''
-                        )}
-                        {weather.description
-                          .toLowerCase()
-                          .includes('Thunderstorm'.toLowerCase()) ? (
-                          <CloudLightningFill
-                            color="#37474f"
-                            className="me-1"
-                            size={'20px'}
-                          />
-                        ) : (
-                          ''
-                        )}
-                        {weather.description
-                          .toLowerCase()
-                          .includes('Snow'.toLowerCase()) ? (
-                          <CloudSnowFill
-                            color="#E2FCFF"
-                            className="me-1"
-                            size={'20px'}
-                          />
-                        ) : (
-                          ''
-                        )}
-                        {weather.description
-                          .toLowerCase()
-                          .includes('Fog'.toLowerCase()) ? (
-                          <CloudFog2Fill
-                            color="#E2FCFF"
-                            className="me-1"
-                            size={'20px'}
-                          />
-                        ) : (
-                          ''
-                        )}
-                        {weather.description.charAt(0).toUpperCase() +
-                          weather.description.slice(1)}
-                      </span>
-                      <span className="d-flex align-items-center">
-                        {weather.condition
-                          .toLowerCase()
-                          .includes('Clouds'.toLowerCase()) ? (
-                          <CloudsFill
-                            color="#E2FCFF"
-                            className="me-1"
-                            size={'20px'}
-                          />
-                        ) : (
-                          ''
-                        )}
-                        {weather.condition
-                          .toLowerCase()
-                          .includes('Sun'.toLowerCase()) ? (
-                          <SunFill
-                            color="#FFBF00"
-                            className="me-1"
-                            size={'20px'}
-                          />
-                        ) : (
-                          ''
-                        )}
-                        {weather.condition
-                          .toLowerCase()
-                          .includes('Rain'.toLowerCase()) ? (
-                          <CloudRainFill
-                            color="#E2FCFF"
-                            className="me-1"
-                            size={'20px'}
-                          />
-                        ) : (
-                          ''
-                        )}
-                        {weather.condition
-                          .toLowerCase()
-                          .includes('Thunderstorm'.toLowerCase()) ? (
-                          <CloudLightningFill
-                            color="#37474f"
-                            className="me-1"
-                            size={'20px'}
-                          />
-                        ) : (
-                          ''
-                        )}
-                        {weather.condition
-                          .toLowerCase()
-                          .includes('Snow'.toLowerCase()) ? (
-                          <CloudSnowFill
-                            color="#E2FCFF"
-                            className="me-1"
-                            size={'20px'}
-                          />
-                        ) : (
-                          ''
-                        )}
-                        {weather.condition
-                          .toLowerCase()
-                          .includes('Fog'.toLowerCase()) ? (
-                          <CloudFog2Fill
-                            color="#E2FCFF"
-                            className="me-1"
-                            size={'20px'}
-                          />
-                        ) : (
-                          ''
-                        )}
-                        {weather.condition}
-                      </span>
+          <>
+            <Row className="justify-content-center w-100 ">
+              <Col>
+                <Card
+                  style={{
+                    background: "transparent",
+                  }}
+                  className="text-light main-card"
+                >
+                  <Card.Body className="d-flex justify-content-between align-items-center">
+                    <div>
+                      <Card.Title className="display-3">
+                        {weather.location}
+                      </Card.Title>
+                      <div>
+                        <div className="date mb-2 fs-5 ">
+                          <span>Today</span>
+                          <span className="fw-bold ms-2">{weather.date}</span>
+                        </div>
+                        <div className="d-flex justify-content-between fs-5">
+                          <span className="d-flex align-items-center">
+                            {weather.description.charAt(0).toUpperCase() +
+                              weather.description.slice(1)}
+                            {weather.description
+                              .toLowerCase()
+                              .includes("Cloud".toLowerCase()) ? (
+                              <CloudsFill
+                                color="#E2FCFF"
+                                className="ms-2"
+                                size={"30px"}
+                              />
+                            ) : (
+                              ""
+                            )}
+                            {weather.description
+                              .toLowerCase()
+                              .includes("Clear".toLowerCase()) ? (
+                              <SunFill
+                                color="#FFBF00"
+                                className="ms-2"
+                                size={"30px"}
+                              />
+                            ) : (
+                              ""
+                            )}
+                            {weather.description
+                              .toLowerCase()
+                              .includes("Rain".toLowerCase()) ? (
+                              <CloudRainFill
+                                color="#E2FCFF"
+                                className="ms-2"
+                                size={"30px"}
+                              />
+                            ) : (
+                              ""
+                            )}
+                            {weather.description
+                              .toLowerCase()
+                              .includes("Thunderstorm".toLowerCase()) ? (
+                              <CloudLightningRainFill
+                                color="#37474f"
+                                className="ms-2"
+                                size={"30px"}
+                              />
+                            ) : (
+                              ""
+                            )}
+                            {weather.description
+                              .toLowerCase()
+                              .includes("Snow".toLowerCase()) ? (
+                              <CloudSnowFill
+                                color="#E2FCFF"
+                                className="ms-2"
+                                size={"30px"}
+                              />
+                            ) : (
+                              ""
+                            )}
+                            {weather.description
+                              .toLowerCase()
+                              .includes("Fog".toLowerCase()) ? (
+                              <CloudFog2Fill
+                                color="#E2FCFF"
+                                className="ms-2"
+                                size={"30px"}
+                              />
+                            ) : (
+                              ""
+                            )}
+                            {weather.description
+                              .toLowerCase()
+                              .includes("Haze".toLowerCase()) ? (
+                              <CloudHaze2Fill
+                                color="#E2FCFF"
+                                className="ms-2"
+                                size={"30px"}
+                              />
+                            ) : (
+                              ""
+                            )}
+                          </span>
+                        </div>
+                        <div className="temperature d-flex mt-2 fs-5">
+                          <span>Max: {weather.maxTemperature}°</span>
+
+                          <span className="ms-2">
+                            Min: {weather.minTemperature}°
+                          </span>
+                        </div>
+                      </div>
                     </div>
-                    <div className="d-flex justify-content-between mt-2 fs-5">
+                    <div className="current-temp fw-light">
                       <span>{weather.temperature}°</span>
-                      <span>Max: {weather.maxTemperature}°</span>
-                      <span>Min: {weather.minTemperature}°</span>
                     </div>
-                  </div>
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
+                  </Card.Body>
+                </Card>
+              </Col>
+            </Row>
+            <Row className="justify-content-center w-100 mt-3">
+              <WeatherForecast />
+              <AdditionalInfos />
+            </Row>
+          </>
         )}
       </Container>
     </>
-  )
-}
-export default Weather
+  );
+};
+export default Weather;

@@ -1,6 +1,6 @@
-import { Container, Nav, Navbar } from 'react-bootstrap'
-import { CloudsFill } from 'react-bootstrap-icons'
-import { Link } from 'react-router-dom'
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { CloudsFill } from "react-bootstrap-icons";
+import { Link } from "react-router-dom";
 
 const MyNavBar = () => {
   return (
@@ -12,14 +12,9 @@ const MyNavBar = () => {
             Weather App
           </div>
         </Link>
-        <Nav className="me-auto">
-          <Link className="nav-link text-white fs-5" to="/">
-            Home
-          </Link>
-        </Nav>
       </Container>
     </Navbar>
-  )
-}
+  );
+};
 
-export default MyNavBar
+export default MyNavBar;
