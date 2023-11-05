@@ -39,7 +39,7 @@ function HomePage() {
       })
       .then((data) => {
         setWeather(data);
-        console.log(data);
+        // console.log(data);
       })
       .catch((err) => {
         console.log("Si è verificato un errore", err);
@@ -52,7 +52,7 @@ function HomePage() {
         <Col xs={10}>
           <WeatherLocation />
         </Col>
-        <Col xs={2}>
+        <Col xs={2} className="ps-0">
           {!location ? (
             <Button
               onClick={handleLocationClick}

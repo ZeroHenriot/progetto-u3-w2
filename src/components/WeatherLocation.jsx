@@ -26,7 +26,7 @@ const WeatherLocation = () => {
           }
         })
         .then((data) => {
-          console.log("blablabla", data);
+          // console.log("blablabla", data);
           setCity(data);
         })
         .catch((err) => {
@@ -65,7 +65,8 @@ const WeatherLocation = () => {
                             key={index}
                             className={` ${
                               !searchValue ? "d-none" : "d-block"
-                            } mt-1 rounded fs-5`}
+                            } mt-1 rounded fs-5 border-0`}
+                            style={{ background: "#b3def4" }}
                           >
                             <Link
                               to={`/weather/?lat=${city.lat}&lon=${city.lon}`}
@@ -74,10 +75,10 @@ const WeatherLocation = () => {
                               style={{ textDecoration: "none" }}
                             >
                               <Row className="w-100 justify-content-between">
-                                <Col xs={5}>
+                                <Col xs={10} md={4}>
                                   <span>{searchValue ? city.name : ""}</span>
                                 </Col>
-                                <Col xs={4}>
+                                <Col md={6} className="d-none d-md-block">
                                   <span>{searchValue ? city.state : ""}</span>
                                 </Col>
                                 <Col xs={2} className="text-end">

@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 import { Alert, Card, Col, Container, Row, Spinner } from "react-bootstrap";
+import {
+  DropletFill,
+  SunriseFill,
+  SunsetFill,
+  Wind,
+} from "react-bootstrap-icons";
 
 import { useLocation } from "react-router-dom";
 
@@ -14,7 +20,7 @@ const AdditionalInfos = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const location = useLocation();
-  console.log("il tuo oggetto", weather);
+  //   console.log("il tuo oggetto", weather);
   const url = `https://api.openweathermap.org/data/2.5/weather${location.search}&appid=`;
   const key = "2675b5f67ebe6be86ee8d73fdee7f98c&units=metric";
 
@@ -32,7 +38,7 @@ const AdditionalInfos = () => {
         }
       })
       .then((data) => {
-        console.log("i tuoi dati bla bla bla", data);
+        // console.log("i tuoi dati bla bla bla", data);
         setTimeout(() => {
           setWeather(() => ({
             sunrise: ` ${new Date(data.sys.sunrise * 1000).getHours()}:00`,
@@ -52,7 +58,7 @@ const AdditionalInfos = () => {
   return (
     <>
       {!isLoading && weather && (
-        <Col xs={5} className="h-100 d-flex flex-column align-items-center">
+        <Col md={5} className=" d-flex flex-column align-items-center">
           <Row className="justify-content-center w-100 mt-3 flex-column">
             <Col>
               <Card
@@ -61,12 +67,17 @@ const AdditionalInfos = () => {
               >
                 <Card.Body className="d-flex align-items-center justify-content-between text-light ">
                   <Row className="w-100 justify-content-between align-items-center">
-                    <Col xs={5}>
-                      <Card.Title className="mb-0">
+                    <Col xs={6} md={5} className="text-nowrap">
+                      <Card.Title className="mb-0 text-nowrap">
                         <span className="fs-4">Sunrise:</span>
                       </Card.Title>
                     </Col>
-                    <Col xs={5} className="fs-5">
+                    <Col xs={6} md={5} className="fs-4 text-nowrap">
+                      <SunriseFill
+                        className="me-2"
+                        fontSize={"30px"}
+                        color="#FED571"
+                      />
                       {weather.sunrise}
                     </Col>
                   </Row>
@@ -80,12 +91,17 @@ const AdditionalInfos = () => {
               >
                 <Card.Body className="d-flex align-items-center justify-content-between text-light ">
                   <Row className="w-100 justify-content-between align-items-center">
-                    <Col xs={5}>
+                    <Col xs={6} md={5} className="text-nowrap">
                       <Card.Title className="mb-0">
                         <span className="fs-4">Sunset:</span>
                       </Card.Title>
                     </Col>
-                    <Col xs={5} className="fs-5">
+                    <Col xs={6} md={5} className="fs-4 text-nowrap">
+                      <SunsetFill
+                        className="me-2"
+                        fontSize={"30px"}
+                        color="#FF8C4C"
+                      />
                       {weather.sunset}
                     </Col>
                   </Row>
@@ -99,12 +115,17 @@ const AdditionalInfos = () => {
               >
                 <Card.Body className="d-flex align-items-center justify-content-between text-light ">
                   <Row className="w-100 justify-content-between align-items-center">
-                    <Col xs={5}>
+                    <Col xs={6} md={5} className="text-nowrap">
                       <Card.Title className="mb-0">
                         <span className="fs-4">Humidity:</span>
                       </Card.Title>
                     </Col>
-                    <Col xs={5} className="fs-5">
+                    <Col xs={6} md={5} className="fs-4 text-nowrap">
+                      <DropletFill
+                        className="me-2"
+                        fontSize={"30px"}
+                        color="#E2FCFF"
+                      />
                       {weather.humidity}
                     </Col>
                   </Row>
@@ -118,12 +139,17 @@ const AdditionalInfos = () => {
               >
                 <Card.Body className="d-flex align-items-center justify-content-between text-light ">
                   <Row className="w-100 justify-content-between align-items-center">
-                    <Col xs={5}>
+                    <Col xs={6} md={5} className="text-nowrap">
                       <Card.Title className="mb-0">
                         <span className="fs-4">Wind:</span>
                       </Card.Title>
                     </Col>
-                    <Col xs={5} className="fs-5">
+                    <Col xs={6} md={5} className="fs-4">
+                      <Wind
+                        className="me-2"
+                        fontSize={"30px"}
+                        color="#E2FCFF"
+                      />
                       {weather.wind}
                     </Col>
                   </Row>

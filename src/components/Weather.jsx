@@ -39,7 +39,7 @@ const Weather = () => {
   const [isError, setIsError] = useState(false);
 
   const location = useLocation();
-  console.log("il tuo oggetto", weather);
+  // console.log("il tuo oggetto", weather);
   //   console.log(location.search)
   const url = `https://api.openweathermap.org/data/2.5/weather${location.search}&appid=`;
   const key = "2675b5f67ebe6be86ee8d73fdee7f98c&units=metric";
@@ -58,7 +58,7 @@ const Weather = () => {
         }
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setTimeout(() => {
           setWeather(() => ({
             location: data.name,
@@ -106,115 +106,121 @@ const Weather = () => {
                   className="text-light main-card"
                 >
                   <Card.Body className="d-flex justify-content-between align-items-center">
-                    <div>
-                      <Card.Title className="display-3">
-                        {weather.location}
-                      </Card.Title>
-                      <div>
-                        <div className="date mb-2 fs-5 ">
-                          <span>Today</span>
-                          <span className="fw-bold ms-2">{weather.date}</span>
-                        </div>
-                        <div className="d-flex justify-content-between fs-5">
-                          <span className="d-flex align-items-center">
-                            {weather.description.charAt(0).toUpperCase() +
-                              weather.description.slice(1)}
-                            {weather.description
-                              .toLowerCase()
-                              .includes("Cloud".toLowerCase()) ? (
-                              <CloudsFill
-                                color="#E2FCFF"
-                                className="ms-2"
-                                size={"30px"}
-                              />
-                            ) : (
-                              ""
-                            )}
-                            {weather.description
-                              .toLowerCase()
-                              .includes("Clear".toLowerCase()) ? (
-                              <SunFill
-                                color="#FFBF00"
-                                className="ms-2"
-                                size={"30px"}
-                              />
-                            ) : (
-                              ""
-                            )}
-                            {weather.description
-                              .toLowerCase()
-                              .includes("Rain".toLowerCase()) ? (
-                              <CloudRainFill
-                                color="#E2FCFF"
-                                className="ms-2"
-                                size={"30px"}
-                              />
-                            ) : (
-                              ""
-                            )}
-                            {weather.description
-                              .toLowerCase()
-                              .includes("Thunderstorm".toLowerCase()) ? (
-                              <CloudLightningRainFill
-                                color="#37474f"
-                                className="ms-2"
-                                size={"30px"}
-                              />
-                            ) : (
-                              ""
-                            )}
-                            {weather.description
-                              .toLowerCase()
-                              .includes("Snow".toLowerCase()) ? (
-                              <CloudSnowFill
-                                color="#E2FCFF"
-                                className="ms-2"
-                                size={"30px"}
-                              />
-                            ) : (
-                              ""
-                            )}
-                            {weather.description
-                              .toLowerCase()
-                              .includes("Fog".toLowerCase()) ? (
-                              <CloudFog2Fill
-                                color="#E2FCFF"
-                                className="ms-2"
-                                size={"30px"}
-                              />
-                            ) : (
-                              ""
-                            )}
-                            {weather.description
-                              .toLowerCase()
-                              .includes("Haze".toLowerCase()) ? (
-                              <CloudHaze2Fill
-                                color="#E2FCFF"
-                                className="ms-2"
-                                size={"30px"}
-                              />
-                            ) : (
-                              ""
-                            )}
-                          </span>
-                        </div>
-                        <div className="temperature d-flex mt-2 fs-5">
-                          <span>Max: {weather.maxTemperature}°</span>
+                    <Row className=" w-100">
+                      <Col className="today-weather">
+                        <Card.Title className="display-3">
+                          {weather.location}
+                        </Card.Title>
+                        <div>
+                          <div className="date mb-2 fs-4 ">
+                            <span>Today</span>
+                            <span className="fw-bold ms-2">{weather.date}</span>
+                          </div>
+                          <div className="d-flex justify-content-between fs-5">
+                            <span className="d-flex align-items-center w-100 today-condition">
+                              <span className="fs-4">
+                                {weather.description.charAt(0).toUpperCase() +
+                                  weather.description.slice(1)}
+                              </span>
+                              {weather.description
+                                .toLowerCase()
+                                .includes("Cloud".toLowerCase()) ? (
+                                <CloudsFill
+                                  color="#E2FCFF"
+                                  className="ms-2"
+                                  size={"30px"}
+                                />
+                              ) : (
+                                ""
+                              )}
+                              {weather.description
+                                .toLowerCase()
+                                .includes("Clear".toLowerCase()) ? (
+                                <SunFill
+                                  color="#FFBF00"
+                                  className="ms-2"
+                                  size={"30px"}
+                                />
+                              ) : (
+                                ""
+                              )}
+                              {weather.description
+                                .toLowerCase()
+                                .includes("Rain".toLowerCase()) ? (
+                                <CloudRainFill
+                                  color="#E2FCFF"
+                                  className="ms-2"
+                                  size={"30px"}
+                                />
+                              ) : (
+                                ""
+                              )}
+                              {weather.description
+                                .toLowerCase()
+                                .includes("Thunderstorm".toLowerCase()) ? (
+                                <CloudLightningRainFill
+                                  color="#37474f"
+                                  className="ms-2"
+                                  size={"30px"}
+                                />
+                              ) : (
+                                ""
+                              )}
+                              {weather.description
+                                .toLowerCase()
+                                .includes("Snow".toLowerCase()) ? (
+                                <CloudSnowFill
+                                  color="#E2FCFF"
+                                  className="ms-2"
+                                  size={"30px"}
+                                />
+                              ) : (
+                                ""
+                              )}
+                              {weather.description
+                                .toLowerCase()
+                                .includes("Fog".toLowerCase()) ? (
+                                <CloudFog2Fill
+                                  color="#E2FCFF"
+                                  className="ms-2"
+                                  size={"30px"}
+                                />
+                              ) : (
+                                ""
+                              )}
+                              {weather.description
+                                .toLowerCase()
+                                .includes("Haze".toLowerCase()) ? (
+                                <CloudHaze2Fill
+                                  color="#E2FCFF"
+                                  className="ms-2"
+                                  size={"30px"}
+                                />
+                              ) : (
+                                ""
+                              )}
+                            </span>
+                          </div>
+                          <div className="temperature d-flex mt-2 fs-4 today-condition">
+                            <span className="text-nowrap">
+                              Max: {weather.maxTemperature}°
+                            </span>
 
-                          <span className="ms-2">
-                            Min: {weather.minTemperature}°
-                          </span>
+                            <span className="ms-2 text-nowrap">
+                              Min: {weather.minTemperature}°
+                            </span>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                    <div className="current-temp fw-light">
-                      <span>{weather.temperature}°</span>
-                    </div>
+                      </Col>
+                      <Col className="current-temp fw-light">
+                        <span>{weather.temperature}°</span>
+                      </Col>
+                    </Row>
                   </Card.Body>
                 </Card>
               </Col>
             </Row>
-            <Row className="justify-content-center w-100">
+            <Row className="justify-content-center w-100 my-3">
               <WeatherForecast />
               <AdditionalInfos />
             </Row>

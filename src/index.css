@@ -2,9 +2,6 @@ html,
 body,
 #root {
   height: 100vh;
-}
-
-#root {
   background: #3d97c4;
 }
 
@@ -34,6 +31,11 @@ code {
 
 .current-temp {
   font-size: 9rem;
+  text-align: center;
+}
+
+.today-weather {
+  text-align: center;
 }
 
 .prev-card {
@@ -46,6 +48,30 @@ code {
   background: #3d97c4;
 }
 
-.list-group-item {
-  background: #70c6f1;
+.prev-weather {
+  border-bottom: 1px solid #add8e6;
+}
+
+.today-condition {
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .prev-weather {
+    border-bottom: 0;
+    border-right: 1px solid #add8e6;
+  }
+
+  .current-temp {
+    text-align: end;
+  }
+}
+
+@media screen and (min-width: 310px) {
+  .today-weather {
+    text-align: initial;
+  }
+  .today-condition {
+    justify-content: start;
+  }
 }

@@ -17,12 +17,12 @@ const WeatherForecast = () => {
   const [weather, setWeather] = useState({});
   const renderiez = [6, 14, 19, 28, 35];
   const [forecastDays, setForecastDays] = useState([]);
-  console.log(forecastDays);
+  //   console.log(forecastDays);
 
   const [isLoading, setIsLoading] = useState(true);
 
   const location = useLocation();
-  console.log("il tuo oggetto", weather);
+  //   console.log("il tuo oggetto", weather);
   //   console.log(location.search)
   const url = `https://api.openweathermap.org/data/2.5/forecast/${location.search}&appid=`;
   const key = "2675b5f67ebe6be86ee8d73fdee7f98c&units=metric";
@@ -84,8 +84,8 @@ const WeatherForecast = () => {
   return (
     <>
       {!isLoading && weather && (
-        <Col xs={7} style={{ borderRight: "1px solid #add8e6" }}>
-          <Row className="justify-content-center w-100 flex-column">
+        <Col md={7} className="prev-weather">
+          <Row className="justify-content-center w-100 mt-3 flex-column">
             {forecastDays.map((day, index) => {
               return (
                 <Col key={index}>
@@ -96,7 +96,7 @@ const WeatherForecast = () => {
                     <Card.Body className="d-flex align-items-center justify-content-between text-light ">
                       <Row className="w-100 justify-content-between align-items-center">
                         <Col xs={5}>
-                          <Card.Title className="mb-0">
+                          <Card.Title className="mb-0 text-nowrap">
                             <span className="fs-4">
                               {dayNames[new Date(day.dt * 1000).getDay()]}
                             </span>
@@ -187,16 +187,9 @@ const WeatherForecast = () => {
                             </div>
                           </div>
                         </Col>
-                        <Col xs={5}>
-                          <div className="d-flex fs-5 justify-content-center">
-                            <span>
-                              <ThermometerHigh color="#D21404" />{" "}
-                              {Math.trunc(day.main.temp_max)}°
-                            </span>
-                            <span>
-                              <ThermometerLow color="#203C61" />{" "}
-                              {Math.trunc(day.main.temp_min)}°
-                            </span>
+                        <Col xs={3}>
+                          <div className="d-flex fs-4 justify-content-start offset-2 text-nowrap">
+                            <span>Temp: {Math.trunc(day.main.temp_max)}°</span>
                           </div>
                         </Col>
                       </Row>
