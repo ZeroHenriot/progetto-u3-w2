@@ -9,6 +9,8 @@ import MyFooter from './components/MyFooter'
 import HomePage from './components/HomePage'
 
 function App() {
+  const hour = new Date ().getHours()
+  console.log(hour)
   return (
     <>
       <BrowserRouter>
@@ -16,7 +18,7 @@ function App() {
           <header>
             <MyNavBar />
           </header>
-          <main className="flex-grow-1 main-bg">
+          <main className={`flex-grow-1 ${hour>6 && hour<18?'main-bg-day':'main-bg-night'}`}>
             <Routes>
               <Route path="/" element={<HomePage />} />
               {/* <Route path="/" element={<WeatherLocation />} /> */}

@@ -4,11 +4,19 @@ body,
   height: 100vh;
 }
 
-.main-bg {
+.main-bg-day {
   background: linear-gradient(
     0deg,
     rgba(104, 205, 255, 1) 0%,
     rgba(61, 151, 196, 1) 100%
+  );
+}
+
+.main-bg-night {
+  background: linear-gradient(
+    0deg,
+    rgba(45, 41, 114, 1) 0%,
+    rgba(63, 36, 102, 1) 100%
   );
 }
 
