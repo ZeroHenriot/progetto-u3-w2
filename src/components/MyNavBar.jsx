@@ -1,8 +1,7 @@
-import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
-import { CloudsFill } from "react-bootstrap-icons";
-import { Link } from "react-router-dom";
-import WeatherLocation from "./WeatherLocation";
-import Geolocation from "./Geolocation";
+import { Col, Container, Navbar, Row } from 'react-bootstrap'
+import { CloudsFill } from 'react-bootstrap-icons'
+import { Link } from 'react-router-dom'
+import WeatherLocation from './WeatherLocation'
 
 const MyNavBar = () => {
   return (
@@ -21,13 +20,10 @@ const MyNavBar = () => {
           <Col xs={10}>
             <WeatherLocation />
           </Col>
-          <Col xs={2} className="ms-0 d-none d-sm-block">
-            {/* <Geolocation /> */}
-          </Col>
         </Row>
       </Container>
     </Navbar>
-  );
-};
+  )
+}
 
-export default MyNavBar;
+export default MyNavBar

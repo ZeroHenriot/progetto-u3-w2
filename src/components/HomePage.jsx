@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import Geolocation from './Geolocation'
 
 function HomePage() {
-  return <></>;
+  return (
+    <>
+      <Geolocation />
+    </>
+  )
 }
 
-export default HomePage;
+export default HomePage

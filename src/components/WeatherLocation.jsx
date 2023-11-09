@@ -1,41 +1,41 @@
-import { useEffect, useState } from "react";
-import { Col, Container, Form, ListGroup, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from 'react'
+import { Col, Form, ListGroup, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 const WeatherLocation = () => {
-  const [city, setCity] = useState([]);
+  const [city, setCity] = useState([])
   // console.log('queste sono le città', city)
-  const [searchValue, setSearchValue] = useState("");
-  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${searchValue}&limit=${5}&appid=`;
-  const key = "2675b5f67ebe6be86ee8d73fdee7f98c";
+  const [searchValue, setSearchValue] = useState('')
+  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${searchValue}&limit=${5}&appid=`
+  const key = '2675b5f67ebe6be86ee8d73fdee7f98c'
 
   useEffect(() => {
-    if (searchValue !== "") {
-      getLocation();
+    if (searchValue !== '') {
+      getLocation()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchValue]);
+  }, [searchValue])
 
   const getLocation = () => {
-    if (searchValue !== "") {
-      console.log(searchValue);
+    if (searchValue !== '') {
+      console.log(searchValue)
       fetch(url + key)
         .then((res) => {
           if (res.ok) {
-            return res.json();
+            return res.json()
           } else {
-            throw new Error("Hai un errore nel recupero");
+            throw new Error('Hai un errore nel recupero')
           }
         })
         .then((data) => {
           // console.log("blablabla", data);
-          setCity(data);
+          setCity(data)
         })
         .catch((err) => {
-          console.log("Hai un nuovo errore ", err);
-        });
+          console.log('Hai un nuovo errore ', err)
+        })
     }
-  };
+  }
 
   return (
     <>
@@ -65,29 +65,29 @@ const WeatherLocation = () => {
                         <Col>
                           <ListGroup.Item
                             className={` ${
-                              !searchValue ? "d-none" : "d-block"
+                              !searchValue ? 'd-none' : 'd-block'
                             } mt-1 rounded fs-5 border-0`}
-                            style={{ background: "#b3def4" }}
+                            style={{ background: '#b3def4' }}
                           >
                             <Link
                               to={`/weather/?lat=${city.lat}&lon=${city.lon}`}
                               className="d-flex
                        justify-content-between link text-black"
-                              style={{ textDecoration: "none" }}
-                              onClick={() => setSearchValue("")}
+                              style={{ textDecoration: 'none' }}
+                              onClick={() => setSearchValue('')}
                             >
                               <Row className="w-100 justify-content-between">
                                 <Col xs={12} md={4}>
-                                  <span>{searchValue ? city.name : ""}</span>
+                                  <span>{searchValue ? city.name : ''}</span>
                                 </Col>
                                 <Col md={6} className="d-none d-md-block">
-                                  <span>{searchValue ? city.state : ""}</span>
+                                  <span>{searchValue ? city.state : ''}</span>
                                 </Col>
                                 <Col
                                   sm={2}
                                   className="text-end d-none d-sm-block"
                                 >
-                                  <span>{searchValue ? city.country : ""}</span>
+                                  <span>{searchValue ? city.country : ''}</span>
                                 </Col>
                               </Row>
                             </Link>
@@ -102,7 +102,7 @@ const WeatherLocation = () => {
         </Row>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default WeatherLocation;
+export default WeatherLocation
