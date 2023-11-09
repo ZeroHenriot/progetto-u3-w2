@@ -6,7 +6,7 @@ const WeatherLocation = () => {
   const [city, setCity] = useState([])
   // console.log('queste sono le città', city)
   const [searchValue, setSearchValue] = useState('')
-  const url = `http://api.openweathermap.org/geo/1.0/direct?q=${searchValue}&limit=${5}&appid=`
+  const url = `https://api.openweathermap.org/geo/1.0/direct?q=${searchValue}&limit=${5}&appid=`
   const key = '2675b5f67ebe6be86ee8d73fdee7f98c'
 
   useEffect(() => {
